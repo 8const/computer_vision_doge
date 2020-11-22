@@ -1,5 +1,9 @@
 This is a quite silly piece of code that adds some doge to Reservoir Dogs.
-I'm learning some basic computer vision stuff with cv2.
+
+Example of what I mean: 
+
+![alt text](https://github.com/8const/computer_vision_doge/master/example.jpg?raw=true)
 
 
-Actual code is in dogyfication.py
+I'm learning some elementary computer vision stuff with cv2.
+
