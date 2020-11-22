@@ -17,15 +17,18 @@ def frame_processing(frame):
 
     #detect regions with faces
     faces = face_cascade.detectMultiScale(frame, 
-                                          scaleFactor=1.3, 
+                                          scaleFactor=1.1, 
                                           minSize=(200,200), 
-                                          maxSize=(1500,1500)
+                                          maxSize=(1500,1500),
+                                          minNeighbors=1
                                           )
     #detect regions with walkers
     (walkers, _) = hog.detectMultiScale(frame,  
-                                        winStride=(6, 6), 
+					winStride=(4, 4), 
                                         padding=(64, 64), 
-                                        scale=1.30,
+                                        scale=1.20,
+                                        finalThreshold=0.6,
+                                        hitThreshold=0.5
                                         ) 
     #replace faces with doge face 
     for (x, y, w, h) in faces:
@@ -50,15 +53,12 @@ if __name__ == "__main__":
 
     #loop through frames
     while(cap.isOpened()):
-	ret, frame = cap.read()
-	if (ret==True):
-	    frame = frame_processing(frame)
-	    out.write(frame)
-	    cv2.imshow('frame',frame)
-	    if cv2.waitKey(1) & 0xFF == ord('q'):
-		break
-	else:
-	    break
+        ret, frame = cap.read()
+        if (ret==True):
+            frame = frame_processing(frame)
+            out.write(frame)
+        else:
+            break
 
     cap.release()
     out.release()
