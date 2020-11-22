@@ -1,9 +1,9 @@
 import cv2 
 import imutils 
+
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 hog = cv2.HOGDescriptor() 
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector()) 
-   
 
 def frame_processing(frame):
     """ frame_processing(frame) -> doge frame;
@@ -22,6 +22,7 @@ def frame_processing(frame):
                                           maxSize=(1500,1500),
                                           minNeighbors=1
                                           )
+
     #detect regions with walkers
     (walkers, _) = hog.detectMultiScale(frame,  
 					winStride=(4, 4), 
@@ -30,6 +31,7 @@ def frame_processing(frame):
                                         finalThreshold=0.6,
                                         hitThreshold=0.5
                                         ) 
+
     #replace faces with doge face 
     for (x, y, w, h) in faces:
         frame[y : y + h, x : x + w] = cv2.resize(doge, (w, h))
